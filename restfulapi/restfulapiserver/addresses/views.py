@@ -76,4 +76,4 @@ def app_login(request):
             return JsonResponse({'code': '0000', 'msg': '로그인성공입니다.'}, status=200)
         else:
             print("실패")
-            return JsonResponse({'code': '1001', 'msg': '로그인실패입니다.'}, status=401)
+            return JsonResponse({'code': '1001', 'msg': '로그인실패입니다.'}, status=200)
