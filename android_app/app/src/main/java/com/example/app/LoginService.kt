@@ -9,7 +9,7 @@ import retrofit2.http.POST
 interface LoginService{
 
     @FormUrlEncoded
-    @POST("/app_login/")
+    @POST("/login_app/")
     fun requestLogin(
         // 인풋을 정의하는 부분
         @Field("userid") userid:String,

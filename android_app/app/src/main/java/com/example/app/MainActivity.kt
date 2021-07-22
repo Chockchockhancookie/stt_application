@@ -1,5 +1,6 @@
 package com.example.app
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,8 +17,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        button_tmp.setOnClickListener {
+            val intent = Intent(this, VoiceActivity::class.java)
+            startActivity(intent)
+        }
+
         var retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.4:8000")
+            .baseUrl("http://192.168.0.3:8000")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -27,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             var textId = editText.text.toString()
             var textPw = editText2.text.toString()
 
-            loginService.requestLogin(textId, textPw).enqueue(object: Callback<Login>{
+            loginService.requestLogin(textId, textPw).enqueue(object : Callback<Login> {
                 override fun onResponse(call: Call<Login>, response: Response<Login>) {
                     var login = response.body() // code, msg
                     var dialog = AlertDialog.Builder(this@MainActivity)
@@ -49,9 +55,9 @@ class MainActivity : AppCompatActivity() {
 //            dialog.setTitle("알람!")
 //            dialog.setMessage("id= " + textId + " pw= " + textPw)
 //            dialog.show()
-
-
         }
+
+
     }
 }
 

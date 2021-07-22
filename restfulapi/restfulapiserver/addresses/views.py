@@ -48,16 +48,35 @@ def address(request, pk):
 
 @csrf_exempt
 def login(request):
+
     if request.method == 'POST':
-        data = JSONParser().parse(request)
-        search_name = data['name']
-        print(search_name)
-        obj = Addresses.objects.get(name=search_name)
-        print(obj.phone_number)
-        if data['phone_number'] == obj.phone_number:
+        print("request " + str(request))
+        print("body " + str(request.body))
+        userid = request.POST.get("userid", "")
+        userpw = request.POST.get("userpw", "")
+
+        print("userid = " + userid + "  userpw = " + userpw)
+        login_result = authenticate(username=userid, password=userpw)
+
+        print("userid = " + userid + " result = " + str(login_result))
+
+        if login_result:
             return HttpResponse(status=200)
         else:
-            return HttpResponse(status=400)
+            return render(request, "addresses/login.html", status=401)
+
+        # data = JSONParser().parse(request)
+        # search_name = data['name']
+        # print(search_name)
+        # obj = Addresses.objects.get(name=search_name)
+        # print(obj.phone_number)
+        # if data['phone_number'] == obj.phone_number:
+        #     return HttpResponse(status=200)
+        # else:
+        #     return HttpResponse(status=400)
+
+    return render(request, 'addresses/login.html')
+
 
 
 @csrf_exempt
