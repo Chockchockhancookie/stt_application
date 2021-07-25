@@ -46,9 +46,9 @@ class VoiceActivity : AppCompatActivity() {
             } else
             {
                 Toast.makeText(applicationContext, "다음 메모를 저장합니다." + tvResult.text, Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MemoActivity::class.java)
+                startActivity(intent)
             }
-
-
         }
     }
 
@@ -67,6 +67,7 @@ class VoiceActivity : AppCompatActivity() {
     private fun setListener() {
         recognitionListener = object: RecognitionListener {
             override fun onReadyForSpeech(params: Bundle?) {
+                tvResult.text = ""
                 Toast.makeText(applicationContext, "음성인식을 시작합니다.", Toast.LENGTH_SHORT).show()
             }
 
@@ -110,8 +111,7 @@ class VoiceActivity : AppCompatActivity() {
                         message = "말하는 시간초과"
                     else -> message = "알 수 없는 오류"
                 }
-                Toast.makeText(applicationContext, "dpfjdjf $message", Toast.LENGTH_SHORT).show()
-                Log.v("test", "출력값: " + tvResult.text)
+                Toast.makeText(applicationContext, "오류가 발생했스니다. $message", Toast.LENGTH_SHORT).show()
             }
 
             override fun onResults(results: Bundle?) {

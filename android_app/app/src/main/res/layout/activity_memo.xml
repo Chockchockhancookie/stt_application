@@ -7,7 +7,7 @@
     tools:context=".MemoActivity">
 
     <Button
-        android:id="@+id/add_memo"
+        android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="메모추가"
@@ -19,6 +19,7 @@
         app:layout_constraintVertical_bias="0.004" />
 
     <ListView
+        android:id="@+id/roomListView"
         android:layout_width="409dp"
         android:layout_height="678dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,3 +28,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.962" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
