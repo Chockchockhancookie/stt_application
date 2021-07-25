@@ -12,7 +12,6 @@
         android:id="@+id/tvResult"
         android:layout_width="366dp"
         android:layout_height="511dp"
-        android:text="This is TextView Result"
         android:textSize="26dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
@@ -22,10 +21,10 @@
         app:layout_constraintVertical_bias="0.072" />
 
     <Button
-        android:id="@+id/bntEnd"
+        android:id="@+id/finish_memo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="end speech"
+        android:text="저장"
         android:textAllCaps="false"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,13 +40,13 @@
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="start speech"
+        android:text="음성 메모 시작"
         android:textAllCaps="false"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.161"
-        app:layout_constraintLeft_toLeftOf="@+id/bntEnd"
+        app:layout_constraintLeft_toLeftOf="@+id/finish_memo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.884" />

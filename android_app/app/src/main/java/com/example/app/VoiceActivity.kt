@@ -38,7 +38,20 @@ class VoiceActivity : AppCompatActivity() {
             speechRecognizer.setRecognitionListener(recognitionListener)
             speechRecognizer.startListening(intent)
         }
+
+        finish_memo.setOnClickListener {
+            val tmp = ""
+            if (tmp == tvResult.text){
+                Toast.makeText(applicationContext, "저장할 메모가 없습니다.", Toast.LENGTH_SHORT).show()
+            } else
+            {
+                Toast.makeText(applicationContext, "다음 메모를 저장합니다." + tvResult.text, Toast.LENGTH_SHORT).show()
+            }
+
+
+        }
     }
+
 
     private fun requestPermission() {
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this,
@@ -97,16 +110,17 @@ class VoiceActivity : AppCompatActivity() {
                         message = "말하는 시간초과"
                     else -> message = "알 수 없는 오류"
                 }
-                Toast.makeText(applicationContext, "에러 발생 $message", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "dpfjdjf $message", Toast.LENGTH_SHORT).show()
+                Log.v("test", "출력값: " + tvResult.text)
             }
 
             override fun onResults(results: Bundle?) {
                 var matches: ArrayList<String> = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION) as ArrayList<String>
+                var name:String = ""
                 for (i in 0 until matches.size) {
-                    Log.v("test", "test: " + matches[i])
-//                    Log.v("test", "test: " + matches[-1])
-                    tvResult.text = matches[i]
+                    name = matches[i]
                 }
+                tvResult.text = name
             }
 
             override fun onPartialResults(partialResults: Bundle?) {

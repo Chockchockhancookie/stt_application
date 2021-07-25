@@ -18,9 +18,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         button_tmp.setOnClickListener {
-            val intent = Intent(this, VoiceActivity::class.java)
+            val intent = Intent(this, MemoActivity::class.java)
             startActivity(intent)
         }
+
 
         var retrofit = Retrofit.Builder()
             .baseUrl("http://192.168.0.3:8000")
