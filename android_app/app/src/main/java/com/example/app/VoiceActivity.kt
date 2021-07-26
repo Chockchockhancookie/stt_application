@@ -1,6 +1,7 @@
 package com.example.app
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -9,8 +10,12 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.text.Layout
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_voice2.*
@@ -45,13 +50,31 @@ class VoiceActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "저장할 메모가 없습니다.", Toast.LENGTH_SHORT).show()
             } else
             {
+                showSettingPopup()
                 Toast.makeText(applicationContext, "다음 메모를 저장합니다." + tvResult.text, Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MemoActivity::class.java)
-                startActivity(intent)
+
             }
         }
     }
+    private fun showSettingPopup() {
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.alert_view, null)
+        val textView: TextView = view.findViewById(R.id.textView)
+        textView.text = ""
 
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("저장할 메모의 제목을 작성하세요")
+            .setPositiveButton("저장") {  dialog, which ->
+                Toast.makeText(applicationContext, "Pushed save", Toast.LENGTH_SHORT)
+                val intent = Intent(this, MemoActivity::class.java)
+                startActivity(intent)
+            }
+            .setNeutralButton("취소", null)
+            .create()
+
+        alertDialog.setView(view)
+        alertDialog.show()
+    }
 
     private fun requestPermission() {
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this,
