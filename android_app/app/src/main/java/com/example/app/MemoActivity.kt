@@ -24,13 +24,21 @@ class MemoActivity : BaseActivity() {
             startActivity(intent)
         }
     }
-    override fun setupEvents() {
 
+    override fun setupEvents() {
+        roomListView.setOnItemClickListener { adapterView, view, i, l ->
+            val clickedRoom = mRoomList[i]
+            val myIntent = Intent(mContext, RoomDetailActivity::class.java)
+
+            myIntent.putExtra("roomInfo", clickedRoom)
+            startActivity(myIntent)
+        }
     }
+
     override fun setValues() {
-        mRoomList.add(Room("2021-7-23", "이틀전"))
-        mRoomList.add(Room("2021-7-24", "어제"))
-        mRoomList.add(Room("2021-7-25", "오늘"))
+        mRoomList.add(Room("2021-7-23", "이틀전", "가나다라"))
+        mRoomList.add(Room("2021-7-24", "어제", "마바사아"))
+        mRoomList.add(Room("2021-7-25", "오늘", "자차카타"))
 
         mRoomAdapter = RoomAdapter(mContext, R.layout.memo_list_item, mRoomList)
         roomListView.adapter = mRoomAdapter
